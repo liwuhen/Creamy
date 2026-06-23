@@ -49,6 +49,7 @@ Excessively long context may cause model call failures. In this case, you MAY us
 </context_contract>
 """
 
+
 class BuiltinImpl:
     """Default hook implementations for basic runtime operations."""
 

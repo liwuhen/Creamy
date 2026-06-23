@@ -11,7 +11,6 @@ from backend.core.events import AsyncStreamEvents, StreamEvent
 from backend.hooks.hook_impl import (
     AGENTS_FILE_NAME,
     DEFAULT_SYSTEM_PROMPT,
-    STRUCTURED_OUTPUT_PROMPT,
     BuiltinImpl,
 )
 from backend.memory.store import FileTapeStore
@@ -158,7 +157,7 @@ def test_system_prompt_appends_workspace_agents_file(tmp_path: Path) -> None:
 
     result = impl.system_prompt(prompt="hello", state={"_runtime_workspace": str(tmp_path)})
 
-    assert result == DEFAULT_SYSTEM_PROMPT + "\n\nlocal rules\n\n" + STRUCTURED_OUTPUT_PROMPT
+    assert result == DEFAULT_SYSTEM_PROMPT + "\n\nlocal rules"
 
 
 def test_system_prompt_ignores_missing_agents_file(tmp_path: Path) -> None:
@@ -166,7 +165,7 @@ def test_system_prompt_ignores_missing_agents_file(tmp_path: Path) -> None:
 
     result = impl.system_prompt(prompt="hello", state={"_runtime_workspace": str(tmp_path)})
 
-    assert result == DEFAULT_SYSTEM_PROMPT + "\n\n\n\n" + STRUCTURED_OUTPUT_PROMPT
+    assert result == DEFAULT_SYSTEM_PROMPT + "\n\n"
 
 
 def test_provide_channels_returns_cli_and_telegram(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
